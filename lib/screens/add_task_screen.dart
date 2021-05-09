@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todoey_flutter/models/task_data.dart';
+import 'package:todoey_flutter/models/tasks.dart';
+
 
 // ignore: must_be_immutable
 class AddTaskScreen extends StatelessWidget {
- final Function addTask; 
  String taskValue;
 
- AddTaskScreen({this.addTask});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,10 @@ class AddTaskScreen extends StatelessWidget {
               ),
               FlatButton(
                 onPressed: () {
-                  addTask(taskValue);
+                  
+                Provider.of<TaskData>(context).addTask(Task(name: taskValue));
+                Navigator.pop(context);
+              
                 },
                 color: Colors.lightBlueAccent,
                 child: Text('Add'),
